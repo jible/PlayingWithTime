@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://be2yum5ej6cw"]
+[gd_scene load_steps=9 format=3 uid="uid://be2yum5ej6cw"]
 
-[ext_resource type="Script" path="res://Player.gd" id="1_s7u6s"]
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_s7u6s"]
 [ext_resource type="Texture2D" uid="uid://d3hkumcp1retg" path="res://icon.svg" id="2_2eu7l"]
-[ext_resource type="Script" path="res://playerController.gd" id="3_rkp11"]
+[ext_resource type="Script" path="res://Scripts/playerController.gd" id="3_rkp11"]
+[ext_resource type="Script" path="res://Scripts/playerStateMachine.gd" id="4_uijfh"]
+[ext_resource type="Script" path="res://Scripts/Idle.gd" id="5_rimeg"]
+[ext_resource type="Script" path="res://Walk.gd" id="6_v0gki"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kyqvo"]
 animations = [{
@@ -24,12 +27,17 @@ script = ExtResource("1_s7u6s")
 sprite_frames = SubResource("SpriteFrames_kyqvo")
 frame_progress = 0.0359188
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionBox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_7gg6w")
 
-[node name="playerController" type="Node2D" parent="."]
+[node name="Input" type="Node2D" parent="."]
 script = ExtResource("3_rkp11")
 
-[node name="stateMachine" type="Node" parent="."]
+[node name="SM" type="Node" parent="."]
+script = ExtResource("4_uijfh")
 
-[node name="Idle" type="Node" parent="stateMachine"]
+[node name="Idle" type="Node" parent="SM"]
+script = ExtResource("5_rimeg")
+
+[node name="Walk" type="Node" parent="SM"]
+script = ExtResource("6_v0gki")
